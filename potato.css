@@ -2,7 +2,7 @@ body{margin: 0;background-color: aquamarine;}
 img#logo{position:fixed;bottom: 5vh;right: 5vw;width: 20vw;z-index: 0;opacity: 0.7;}
 img#mainimg{width: 99vw;margin: 0vw;position: relative;}
 p#maintitle{margin: 0;padding: 0;}
-p#maintitle{position: absolute;top: 60vw;left: 25%;font-size: 7vw;font-weight: bold;
+p#maintitle{position: absolute;top: 40vw;left: 25%;font-size: 7vw;font-weight: bold;
     text-shadow:
     1px 1px 0 #FFF, -1px -1px 0 #FFF,
     -1px 1px 0 #FFF, 1px -1px 0 #FFF,
