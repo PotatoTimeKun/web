@@ -1,0 +1,34 @@
+body{margin: 0;background-color: aquamarine;}
+img#logo{position:fixed;bottom: 5vh;right: 5vw;width: 20vw;z-index: 0;opacity: 0.7;}
+img#mainimg{width: 99vw;margin: 0vw;position: relative;}
+p#maintitle{margin: 0;padding: 0;}
+p#maintitle{position: absolute;top: 60%;left: 25%;font-size: 7vw;font-weight: bold;
+    text-shadow:
+    1px 1px 0 #FFF, -1px -1px 0 #FFF,
+    -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+    0px 1px 0 #FFF,  0-1px 0 #FFF,
+    -1px 0 0 #FFF, 1px 0 0 #FFF;}
+p#cou{opacity: 0.5;font-size: 2vw;padding-left: 20vw;}
+section{width: 95vw;margin: 2.5vw;border: 3px solid;border-radius: 5px;z-index: 10;position: relative;background-color: rgba(255, 255, 255, 0.3);}
+section h1{font-size: 5vw;margin:1vw;margin-left: 5%;}
+section#myself img{width: 30vw;}
+section#myself h1{margin:0;position:absolute;left: 31vw;}
+section#myself h2{margin:0;position:absolute;left: 31vw;top:10vw;font-size: 2vw;}
+section#myself p{margin:0;position:absolute;left: 31vw;top:15vw;font-size: 1.2vw;}
+a{color:brown;font-size: 1.2vw;}
+p{font-size: 1.2vw;}
+section#his h2{font-size: 1.8vw;margin-left: 1vw;}
+section#blog a{display:block;padding-left:1vw;padding-top: 1vw;padding-bottom: 1vw;width: 90%;border: 3px solid;color: red;margin-left: 2%;font-size: 2vw;}
+section#link a{margin-left: 1vw;font-size: 2vw;}
+section#link p{margin-left: 2vw;}
+section#oped img{width: 50%;}
+section#oped img.s1{position: absolute;}
+section#oped img.s2{position: absolute;}
+section#oped img.s3{position: absolute;}
+section#oped img.s4{position: absolute;}
+section#oped img.s5{position: absolute;}
+section#oped img.s1{left: 50%;}
+section#oped img.s2{left: 50%;top:16.7%;padding-top: 8%;}
+section#oped img.s3{left: 50%;top:33.4%;padding-top: 6.6%;}
+section#oped img.s4{left: 50%;top:50.1%;padding-top: 5%;}
+section#oped img.s5{left: 50%;top:66.8%;padding-top: 3.5%;}
