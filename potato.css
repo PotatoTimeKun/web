@@ -21,14 +21,3 @@ section#his h2{font-size: 1.8vw;margin-left: 1vw;}
 section#blog a{display:block;padding-left:1vw;padding-top: 1vw;padding-bottom: 1vw;width: 90%;border: 3px solid;color: red;margin-left: 2%;font-size: 2vw;}
 section#link a{margin-left: 1vw;font-size: 2vw;}
 section#link p{margin-left: 2vw;}
-section#oped img{width: 50%;}
-section#oped img.s1{position: absolute;}
-section#oped img.s2{position: absolute;}
-section#oped img.s3{position: absolute;}
-section#oped img.s4{position: absolute;}
-section#oped img.s5{position: absolute;}
-section#oped img.s1{left: 50%;}
-section#oped img.s2{left: 50%;top:16.7%;padding-top: 8%;}
-section#oped img.s3{left: 50%;top:33.4%;padding-top: 6.6%;}
-section#oped img.s4{left: 50%;top:50.1%;padding-top: 5%;}
-section#oped img.s5{left: 50%;top:66.8%;padding-top: 3.5%;}
