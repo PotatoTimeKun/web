@@ -1,34 +1,51 @@
-body{margin: 0;background-color: aquamarine;}
+header{width: 100%;color: black;border-bottom: 3px solid black;z-index: 1000;margin: 0;background-color: aqua;position: fixed;}
+body{margin: 0;background-color: aquamarine;z-index: 0;}
 img#logo{position:fixed;bottom: 5vh;right: 5vw;width: 20vw;z-index: 0;opacity: 0.7;}
-img#mainimg{width: 99vw;margin: 0vw;position: relative;}
-p#maintitle{margin: 0;padding: 0;}
-p#maintitle{position: absolute;top: 40vw;left: 25%;font-size: 7vw;font-weight: bold;
-    text-shadow:
-    1px 1px 0 #FFF, -1px -1px 0 #FFF,
-    -1px 1px 0 #FFF, 1px -1px 0 #FFF,
-    0px 1px 0 #FFF,  0-1px 0 #FFF,
-    -1px 0 0 #FFF, 1px 0 0 #FFF;}
-p#cou{opacity: 0.5;font-size: 2vw;padding-left: 20vw;}
-section{width: 95vw;margin: 2.5vw;border: 3px solid;border-radius: 5px;z-index: 10;position: relative;background-color: rgba(255, 255, 255, 0.3);}
-section h1{font-size: 5vw;margin:1vw;margin-left: 5%;}
-section#myself img{width: 30vw;}
-section#myself h1{margin:0;position:absolute;left: 31vw;}
-section#myself h2{margin:0;position:absolute;left: 31vw;top:10vw;font-size: 2vw;}
-section#myself p{margin:0;position:absolute;left: 31vw;top:15vw;font-size: 1.2vw;}
-a{color:brown;font-size: 1.2vw;}
-p{font-size: 1.2vw;}
-section#his h2{font-size: 1.8vw;margin-left: 1vw;}
-section#blog a{display:block;padding-left:1vw;padding-top: 1vw;padding-bottom: 1vw;width: 90%;border: 3px solid;color: red;margin-left: 2%;font-size: 2vw;}
-section#link a{margin-left: 1vw;font-size: 2vw;}
-section#link p{margin-left: 2vw;}
-section#oped img{width: 50%;}
-section#oped img.s1{position: absolute;}
-section#oped img.s2{position: absolute;}
-section#oped img.s3{position: absolute;}
-section#oped img.s4{position: absolute;}
-section#oped img.s5{position: absolute;}
-section#oped img.s1{left: 50%;}
-section#oped img.s2{left: 50%;top:16.7%;padding-top: 8%;}
-section#oped img.s3{left: 50%;top:33.4%;padding-top: 6.6%;}
-section#oped img.s4{left: 50%;top:50.1%;padding-top: 5%;}
-section#oped img.s5{left: 50%;top:66.8%;padding-top: 3.5%;}
+img#mainimg{width:100%;margin: 0vw;position: relative;}
+section{width: 95vw;margin: 2.5vw;border: 3px dotted;border-radius: 5px;z-index: 10;position: relative;background-color: rgba(255, 255, 255, 0.3);}
+h1{font-size: 4rem;text-align: center;}
+a:link   {color:rgb(11, 112, 8);}
+a:visited{color:rgb(29, 172, 0);}
+a:hover  {color:rgb(197, 46, 0);}
+a:active {color:rgb(255, 0, 0);}
+a        {font-size: 1.2rem;text-decoration: none;}
+header a:link   {color: rgb(255, 30, 0);}
+header a:visited{color: rgb(255, 30, 0);}
+header a:hover  {color: rgb(255, 30, 0);}
+header a:active {color: rgb(255, 30, 0);}
+header a        {font-size: 2.6vw;color: rgb(255, 64, 30);margin-left: 5vw;padding: 0;}
+p {font-size: 1.2rem;}
+#fav h6{font-size: 2rem;margin: 0;}
+.yt{width: 50%; aspect-ratio: 16/9;}
+iframe{width: 100%;height: 100%;}
+#myself img{width: 30vw;}
+@media screen and (min-width:801px){
+    #myself h2{margin:2rem;font-size: 2rem;}
+#myself p {margin:2rem;line-height: 2rem;}
+    #myself{display: flex;justify-content: space-between;align-items:flex-start}
+    .phone{display: none;}
+}
+#his h2{font-size: 1.8rem;margin-left: 1vw;}
+#his ul{font-size: 1.2rem;}
+#blog a{font-size: 2vw;}
+#blog h2{margin-top: 1vw;margin-bottom: 1vw;}
+#blog div{border: 3px solid;color: red;margin: 2vw;padding-left: 1vw;}
+#link a{margin-left: 1vw;font-size: 2rem;}
+#link p{margin-left: 2vw;}
+#oped table,table img{width: 100%;}
+#oped table td{margin:1vw;padding:0;border:0;}
+#blog p{opacity: 0.5;color: black;}
+@media screen and (max-width:800px){
+    #fav h6{font-size: 4vw;margin: 0;}
+    .yt{width: 100%; aspect-ratio: 16/9;}
+    header{display: none;}
+    p {font-size: 4vw;}
+    h1{font-size: 8vw;}
+    #logo{display: none;}
+    #myself img{display: none;}
+    #myself h2{font-size: 6vw;}
+    #blog a{font-size: 5vw;}
+    #myself div{padding: 1vw;}
+    .pc{display: none;}
+    #link a{font-size: 5vw;}
+}
