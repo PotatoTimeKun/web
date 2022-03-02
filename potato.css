@@ -1,14 +1,22 @@
-header{width: 100%;color: black;border-bottom: 3px solid black;z-index: 1000;margin: 0;background-color: aqua;position: fixed;}
-body{margin: 0;background-color: aquamarine;z-index: 0;}
+header{width: 100%;color: black;border-bottom: 3px solid black;z-index: 1000;margin: 0;background-color: lightcyan;position: fixed;}
+body{margin: 0;background-color: lightblue;z-index: 0;}
 img#logo{position:fixed;bottom: 5vh;right: 5vw;width: 20vw;z-index: 0;opacity: 0.7;}
 img#mainimg{width:100%;margin: 0vw;position: relative;}
-section{width: 95vw;margin: 2.5vw;border: 3px dotted;border-radius: 5px;z-index: 10;position: relative;background-color: rgba(255, 255, 255, 0.3);}
+section{width: 90vw;margin: 2.5vw;border: 3px dotted;border-radius: 5px;z-index: 10;position: relative;background-color: rgba(255, 255, 255, 0.3);margin: 2.5vw;}
 h1{font-size: 4rem;text-align: center;}
 a:link   {color:rgb(11, 112, 8);}
 a:visited{color:rgb(29, 172, 0);}
 a:hover  {color:rgb(197, 46, 0);}
 a:active {color:rgb(255, 0, 0);}
 a        {font-size: 1.2rem;text-decoration: none;}
+#myself a:link   {color:rgb(241, 106, 44);}
+#myself a:visited{color:rgb(241, 106, 44);}
+#myself a:hover  {color:rgb(255, 0, 0);}
+#myself a:active {color:rgb(255, 0, 0);}
+#his a:link   {color:rgb(241, 106, 44);}
+#his a:visited{color:rgb(255, 165, 124);}
+#his a:hover  {color:rgb(255, 0, 0);}
+#his a:active {color:rgb(255, 0, 0);}
 header a:link   {color: rgb(255, 30, 0);}
 header a:visited{color: rgb(255, 30, 0);}
 header a:hover  {color: rgb(255, 30, 0);}
