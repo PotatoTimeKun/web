@@ -8,6 +8,7 @@
     <meta name="keywords" content="ポテトタイム君,ポテト君,ホームページ">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="potato.css?ver=1.2">
+    <link rel="icon" type="image/png" href="potatopic/logo.png">
 </head>
 <header>
     <img src="potatopic\header.png">
@@ -17,6 +18,7 @@
             <a href="#h">歴史</a>
             <a href="#b">ブログ</a>
             <a href="#l">リンク</a>
+            <a href="#g">自作ゲーム紹介</a>
             <a href="#f">おすすめ動画</a>
             <a href="#o">OP・ED集</a>
         </div>
@@ -28,16 +30,17 @@
     </span>
     <nav class="nav">
         <ul class="nav_menu_ul">
-          <li class="nav_menu_li"><a href="#m">自己紹介</a></li>
-          <li class="nav_menu_li"><a href="#h">歴史</a></li>
-          <li class="nav_menu_li"><a href="#b">ブログ</a></li>
-          <li class="nav_menu_li"><a href="#l">リンク</a></li>
-          <li class="nav_menu_li"><a href="#f">おすすめ動画</a></li>
-          <li class="nav_menu_li"><a href="#o">OP・ED集</a></li>
+            <li class="nav_menu_li"><a href="#m">自己紹介</a></li>
+            <li class="nav_menu_li"><a href="#h">歴史</a></li>
+            <li class="nav_menu_li"><a href="#b">ブログ</a></li>
+            <li class="nav_menu_li"><a href="#l">リンク</a></li>
+            <li class="nav_menu_li"><a href="#g">自作ゲーム紹介</a></li>
+            <li class="nav_menu_li"><a href="#f">おすすめ動画</a></li>
+            <li class="nav_menu_li"><a href="#o">OP・ED集</a></li>
         </ul>
     </nav>
     <script>
-        document.querySelector('.nav_toggle').addEventListener('click',function(){document.querySelector('.nav_toggle').classList.toggle('show');document.querySelector('.nav').classList.toggle('show');});
+        document.querySelector('.nav_toggle').addEventListener('click', function () { document.querySelector('.nav_toggle').classList.toggle('show'); document.querySelector('.nav').classList.toggle('show'); });
     </script>
 </header>
 
@@ -136,6 +139,27 @@
         <a href="https://ichikota8440.wixsite.com/-site" target="_blank">仮ホームページ</a>
         <p> 仮ですが消すのがめんどいので残しときます()</p>
     </section>
+    <h1 id="g">自作ゲーム紹介</h1>
+    <section id="game">
+        <a href="potatogame/shogi.html" target="_blank">乱数将棋</a>
+        <p> ブラウザゲーム(Flutter製)</p>
+        <a href="potatogame/cipher.html" target="_blank">暗号化・復号ツール</a>
+        <p> ゲームではない、ブラウザ(Flutter製)</p>
+        <a href="potatogame/soroeru.html" target="_blank">Soroeru</a>
+        <p> ブラウザゲーム(JavaScript製)</p>
+        <a href="potatogame/birth.html" target="_blank">誕生日メモ</a>
+        <p> ゲームではない、ブラウザ(JavaScript製)</p>
+        <a href="potatogame/kusoge.html" target="_blank">やろうぜクソゲー</a>
+        <p> Android用ゲーム(Android Studio(Java)製)</p>
+        <a href="potatogame/hit.html" target="_blank">Hit Face!</a>
+        <p> windows用ゲーム(Processing製)</p>
+        <a href="potatogame/hitohude.html" target="_blank">一筆書き迷路</a>
+        <p> windows用ゲーム(Python製)</p>
+        <a href="potatogame/oolong.html" target="_blank">ウーロンを探せ</a>
+        <p> windows用ゲーム(Python製)</p>
+        <a href="potatogame/sugoroku.html" target="_blank">スゴロク</a>
+        <p> windows用ゲーム(Python製)</p>
+    </section>
     <h1 id="f">おすすめ動画集</h1>
     <section id="fav">
         <p>今北産業方式(?)でそれぞれ3行で紹介していきます。</p>
@@ -164,7 +188,8 @@
         </div>
         <div class="mov">
             <h6>【ポテトラジオ君第1回】新しいポテトを作る</h6>
-            <div class="yt"><iframe width="560" height="315" src="https://www.youtube.com/embed/fgo0fZGEBLw" frameborder="0" allowfullscreen></iframe></div>
+            <div class="yt"><iframe width="560" height="315" src="https://www.youtube.com/embed/fgo0fZGEBLw"
+                    frameborder="0" allowfullscreen></iframe></div>
             <p>
                 なんとなくラジオがやってみたかったので()<br>
                 さて第2回はいつ作られるのでしょうか...<br>

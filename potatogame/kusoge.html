@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ポテトゲーム君-クソゲー-</title>
+    <link rel="stylesheet" href="game0.css">
+</head>
+
+<body>
+    <h1 class="title">クソゲーを作りたかっただけ</h1>
+    <section class="play">
+        <p>ダウンロード(.apk) → <a href="kuso.apk">やろうぜクソゲー(Android)</a></p>
+    </section>
+    <h2>ゲーム概要</h2>
+    <section class="sec">
+        <img src="kuso1.png" class="screenshot">
+        <p class="text">
+            <a href="https://youtu.be/woLfCAnIQ3w" target="_blank">動画</a>にもしたやーつですw<br>
+            クソゲーが題材なのでもちろんクソゲーです()<br>
+            6個のボタンがあり、押すとランダムな効果が現れます。<br>
+            押す毎に効果は変わります。<br>
+            点数をできるだけ高くして、好きな時に終了を押します。<br>
+        </p>
+    </section>
+    <h2>リザルト</h2>
+    <section class="sec">
+        <img src="kuso2.png" class="screenshot">
+        <p class="text">
+            終了を押すとこんな感じの画面がでてきます。<br>
+            アイテムはどんどん貯まっていきます。キャラは重複しても意味ないです。<br>
+            点数が高いほどレアアイテムやレアキャラがでてきます。<br>
+            アイテムはゲーム中で使えます。<br>
+            キャラについては次のセクションで詳しく説明します。<br>
+            レアアイテム・キャラ目当てなら逆に高すぎない点数の方がいいです。<br>
+            ガチャの設定上同じものばっか出てきます()<br>
+        </p>
+    </section>
+    <h2>キャラ図鑑</h2>
+    <section class="sec">
+        <img src="kuso3.png" class="screenshot">
+        <p class="text">
+            キャラは「くそ」4種、「まだマシ」4種、「クソレア」4種、「マジレア」(つまりシークレット)1種からなります。<br>
+            自分で作っといて多分僕が一番廃人なので13種全部持ってます。<br>
+            ゲットしたキャラは図鑑に表示され、タップすると見た目や効果が見れます。<br>
+            キャラはセットするとゲーム中でその効果を得られます。<br>
+            セット可能なキャラは1体だけです。<br>
+            ちなみにシークレットの条件ですが、<br>
+            200点以上になると<br>
+            0.1%に固定で出現します。<br>
+            つまり、ひたすらポチポチしてるとでてきます。<br>
+        </p>
+    </section>
+    <h2>技術的なこと</h2>
+    <section class="sec">
+        <p class="text">
+            ソースコードとかは僕のGitHubレポジトリの<a href="https://github.com/PotatoTimeKun/programming/tree/main/Java/MyKusoGame/mainfile(Android)"
+                target="_blank">ここ</a>にあります。<br>
+            点数にはint型を使用しているので、2^31-1を超えるとオーバーフローを起こして負数になりますw<br>
+            システム上最高点数である2^31-1を出したければ<br>
+            この数は2進数では(01...1)であり、1が31個続くため<br>
+            点数が0になった時に<br>
+            アイテムでじゃがいも(+1)とシャーペン(*2)という1セットを<br>
+            30回使い続けて<br>
+            最後にじゃがいもを1つ使えばできます。<br>
+            そこでもう一度じゃがいもを使うと最低得点である-2^31になります()<br>
+            あと実は、キャラがボタンをいじる効果(良いボタンにする、悪いボタンを消す)は、<br>
+            先頭から効果をつけるので最初のボタンを押すといいですw<br>
+        </p>
+    </section>
+    <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ポテトゲーム君-乱数将棋-</title>
+    <link rel="stylesheet" href="game0.css">
+</head>
+
+<body>
+    <h1 class="title">完全に運ゲーな将棋</h1>
+    <section class="play">
+        <p>ゲームをプレイ → <a href="https://potatotimekun.github.io/flutter_web/shogi/" target="_blank">乱数将棋(ブラウザ版)</a></p>
+    </section>
+    <h2>ゲーム概要</h2>
+    <section class="sec">
+        <img src="shogi_1.png" class="screenshot">
+        <p class="text">
+            将棋の駒を動かす部分を乱数でやってしまう謎のゲームです。<br>
+            ゲームモードは「将棋!」「将棋?」「将棋ではない」の3つがあります。<br>
+            後のゲームモードほど将棋っぽさが消えていきます。<br>
+        </p>
+    </section>
+    <h2>将棋!</h2>
+    <section class="sec">
+        <img src="shogi_3.png" class="screenshot">
+        <p class="text">
+            5×5の盤面で自分の王と相手(コンピューター)の王で戦います。<br>
+            「駒を動かす」を押すと駒が勝ってに動きます。(自分は青)<br>
+            「リセット」で盤面を初期状態に戻し、乱数を作り直します。<br>
+            将棋のルールに則って王は1マスずつ進みます。<br>
+        </p>
+    </section>
+    <h2>将棋?</h2>
+    <section class="sec">
+        <p class="text">
+            将棋!とほぼ同じですが、王は遠くまで動きます。<br>
+            動くというよりもはやワープですね。<br>
+        </p>
+    </section>
+    <h2>将棋ではない</h2>
+    <section class="sec">
+        <img src="shogi_4.png" class="screenshot">
+        <p class="text">
+            どう見ても将棋じゃない<br>
+            全部の王を取ったら勝ちです。<br>
+            ちなみに王は将棋?と同じワープする方式です。<br>
+        </p>
+    </section>
+    <h2>技術的なこと</h2>
+    <section class="sec">
+        <p class="text">
+            ソースコードとかは僕のGitHubレポジトリの<a href="https://github.com/PotatoTimeKun/programming/tree/main/Dart/shogi"
+                target="_blank">ここ</a>にあります。<br>
+            合同法乱数によって乱数を生成してます。種は時間です。<br>
+            乱数の実験中に思いついたやつです。<br>
+        </p>
+    </section>
+    <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
+</body>
+
+</html>
