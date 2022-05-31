@@ -6,8 +6,43 @@
     <title>ポテトゲーム君-暗号生成-</title>
     <link rel="stylesheet" href="game0.css">
 </head>
-
+<header>
+    <img src="..\potatopic\header.png">
+    <table class="pc">
+        <div class="pc">
+            <a href="..\index.html#mainimg">ホーム</a>
+            <a href="..\index.html#m">自己紹介</a>
+            <a href="..\index.html#h">歴史</a>
+            <a href="..\index.html#b">ブログ</a>
+            <a href="..\index.html#l">リンク</a>
+            <a href="..\index.html#g">自作ゲーム紹介</a>
+            <a href="..\index.html#f">おすすめ動画</a>
+            <a href="..\index.html#o">OP・ED集</a>
+        </div>
+    </table>
+    <span class="nav_toggle">
+        <i></i>
+        <i></i>
+        <i></i>
+    </span>
+    <nav class="nav">
+        <ul class="nav_menu_ul">
+            <li class="nav_menu_li"><a href="..\index.html#mainimg">ホーム</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#m">自己紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#h">歴史</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#b">ブログ</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#l">リンク</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#g">自作ゲーム紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#f">おすすめ動画</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#o">OP・ED集</a></li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelector('.nav_toggle').addEventListener('click', function () { document.querySelector('.nav_toggle').classList.toggle('show'); document.querySelector('.nav').classList.toggle('show'); });
+    </script>
+</header>
 <body>
+    <h1 class="spacer">aaa</h1>
     <h1 class="title">暗号が使えるツール</h1>
     <section class="play">
         <p>ページ → <a href="https://potatotimekun.github.io/flutter_web/cipher/" target="_blank">乱数将棋(ブラウザ版)</a></p>
