@@ -1,101 +1,157 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>ポテトブログ君-BrainPotato-</title>
-        <link rel="stylesheet" href="blog0.css">
-    </head>
-    <body>
-        <h1 id="maintitle">プログラミング言語を開発した話</h1>
-        <p id="text">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ポテトブログ君-BrainPotato-</title>
+    <link rel="stylesheet" href="blog0.css">
+</head>
+<header>
+    <img src="..\potatopic\header.png">
+    <table class="pc">
+        <div class="pc">
+            <a href="..\index.html#mainimg">ホーム</a>
+            <a href="..\index.html#m">自己紹介</a>
+            <a href="..\index.html#h">歴史</a>
+            <a href="..\index.html#b">ブログ</a>
+            <a href="..\index.html#l">リンク</a>
+            <a href="..\index.html#g">自作ゲーム紹介</a>
+            <a href="..\index.html#f">おすすめ動画</a>
+            <a href="..\index.html#o">OP・ED集</a>
+        </div>
+    </table>
+    <span class="nav_toggle">
+        <i></i>
+        <i></i>
+        <i></i>
+    </span>
+    <nav class="nav">
+        <ul class="nav_menu_ul">
+            <li class="nav_menu_li"><a href="..\index.html#mainimg">ホーム</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#m">自己紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#h">歴史</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#b">ブログ</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#l">リンク</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#g">自作ゲーム紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#f">おすすめ動画</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#o">OP・ED集</a></li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelector('.nav_toggle').addEventListener('click', function () { document.querySelector('.nav_toggle').classList.toggle('show'); document.querySelector('.nav').classList.toggle('show'); });
+    </script>
+</header>
+
+<body>
+    <h1 class="spacer">aaa</h1>
+    <h1 class="title">プログラミング言語を開発した話</h1>
+    <section class="sec">
+        <p class="text">
             Brainf*ckというプログラミング言語を知ってますか。<br>
-            <a href="https://ja.wikipedia.org/wiki/Brainfuck" target="_blank">Brainf*ck</a>は命令が「&lt;&gt;+-.,[]」の8種類しかない言語なんですけど、
+            <a href="https://ja.wikipedia.org/wiki/Brainfuck"
+                target="_blank">Brainf*ck</a>は命令が「&lt;&gt;+-.,[]」の8種類しかない言語なんですけど、
             こんな感じの言語だったら作れそうだなということでBrainPotatoを開発しました...w<br>
-            <a href="https://github.com/PotatoTimeKun/programming/blob/main/Cpp/BrainPotato_language.cpp">GitHub</a>で公開してるのでC++をコンパイルできる環境であれば実行できます。<br>
-            (ブラウザだけで実行したい場合、<a href="https://glot.io/snippets/g862md1y7g">grot.io</a>に公開してるものがあります。)<br>
+            <a
+                href="https://github.com/PotatoTimeKun/programming/blob/main/Cpp/BrainPotato_language.cpp">GitHub</a>で公開してるのでC++をコンパイルできる環境であれば実行できます。<br>
+
+            これは追記ですが、C#でGUI版も作りました!この方が使い勝手が良いです...w<br>
+            →<a href="https://github.com/PotatoTimeKun/programming/blob/main/Csharp/BrainPotato.cs">これ</a><br>
+            →<a href="https://github.com/PotatoTimeKun/programming/blob/main/BrainPotato/BrainPotato.exe">exeファイルとしてWindows環境でコンパイルしたもの</a><br>
+            C++版はShift-jis、C#版はUnicodeで文字を扱えます。<br>
             プログラミング言語の内容としては
         </p>
-            <table border="1" class="text">
-                <thead>
-                    <tr>
-                        <th>命令</th>
-                        <th>実行結果</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>p</td>
-                        <td>ポインタのアドレスをインクリメント(ptr++)</td>
-                    </tr>
-                    <tr>
-                        <td>o</td>
-                        <td>ポインタのアドレスをデクリメント(ptr--)</td>
-                    </tr>
-                    <tr>
-                        <td>t</td>
-                        <td>ポインタの値をインクリメント(*ptr+=1)</td>
-                    </tr>
-                    <tr>
-                        <td>m</td>
-                        <td>ポインタの値をデクリメント(*ptr-=1)</td>
-                    </tr>
-                    <tr>
-                        <td>k</td>
-                        <td>ポインタの値をASCII文字として出力</td>
-                    </tr>
-                    <tr>
-                        <td>u</td>
-                        <td>ポインタの値が0ならnまで飛ばす</td>
-                    </tr>
-                    <tr>
-                        <td>n</td>
-                        <td>ポインタの値が0以外ならuまで戻る</td>
-                    </tr>
-                    <tr>
-                        <td>i</td>
-                        <td>ポインタの値が0ならaかe(eはaで閉じる)まで飛ばす</td>
-                    </tr>
-                    <tr>
-                        <td>e</td>
-                        <td>iで飛ばされた場合のみaまで実行する</td>
-                    </tr>
-                    <tr>
-                        <td>a</td>
-                        <td>区切り用、これだけあっても何も実行しません</td>
-                    </tr>
-                    <tr>
-                        <td>c</td>
-                        <td>ポインタの値を2倍する(*ptr*=2)</td>
-                    </tr>
-                    <tr>
-                        <td>h</td>
-                        <td>ポインタの値を1/2倍する(*ptr/=2)</td>
-                    </tr>
-                    <tr>
-                        <td>s</td>
-                        <td>キーボード入力を1文字受け取りポインタに格納する</td>
-                    </tr>
-                </tbody>
-            </table>
+    </section>
+    <table border="1" class="t">
+        <thead>
+            <tr>
+                <th>命令</th>
+                <th>実行結果</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>p</td>
+                <td>ポインタのアドレスをインクリメント(ptr++)</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>ポインタのアドレスをデクリメント(ptr--)</td>
+            </tr>
+            <tr>
+                <td>t</td>
+                <td>ポインタの値をインクリメント(*ptr+=1)</td>
+            </tr>
+            <tr>
+                <td>m</td>
+                <td>ポインタの値をデクリメント(*ptr-=1)</td>
+            </tr>
+            <tr>
+                <td>k</td>
+                <td>ポインタの値を文字として出力</td>
+            </tr>
+            <tr>
+                <td>u</td>
+                <td>ポインタの値が0ならnまで飛ばす</td>
+            </tr>
+            <tr>
+                <td>n</td>
+                <td>ポインタの値が0以外ならuまで戻る</td>
+            </tr>
+            <tr>
+                <td>i</td>
+                <td>ポインタの値が0ならaかe(eはaで閉じる)まで飛ばす</td>
+            </tr>
+            <tr>
+                <td>e</td>
+                <td>iで飛ばされた場合のみaまで実行する</td>
+            </tr>
+            <tr>
+                <td>a</td>
+                <td>区切り用、これだけあっても何も実行しません</td>
+            </tr>
+            <tr>
+                <td>c</td>
+                <td>ポインタの値を2倍する(*ptr*=2)</td>
+            </tr>
+            <tr>
+                <td>h</td>
+                <td>ポインタの値を1/2倍する(*ptr/=2)</td>
+            </tr>
+            <tr>
+                <td>s</td>
+                <td>キーボード入力を1文字受け取りポインタに格納する</td>
+            </tr>
+        </tbody>
+    </table>
+    <style>
+        .t{font-size: 4vw;background-color: white;margin: 30px;}
+    </style>
+    <section class="sec">
         <p class="text">
             これだけです(これでもBrainf*ckよりは多い...w)<br>
             関係ない文字は無視される(ただし空白や改行といった文字はプログラムが途切れたと判断される)ので<br>
-            「pasta/kutte/tacos/kuttara/umai/wa」<br>
+            <br>pasta/kutte/tacos/<br>kuttara/umai/wa<br><br>
+
+            (半角英数のみで/を含む行が自動改行してくれないので、変な改行したりしてます。)<br>
+            <br>
             みたいな言葉遊びもできます()<br>
-            「potatotimekun」<br>
+            (C#版は空白で区切ってもいいです。)<br>
+            <br>potatotimekun<br><br>
             は...動かないことはないですけどやるなら<br>
-            「potatOtimekuN」<br>
+            <br>potatOtimekuN<br><br>
             とかになりますかねw<br>
             ちなみに、プログラミング言語には著作権はありません。ただしプログラム自体には著作権があります。<br>
-            最近僕の<a href="https://github.com/PotatoTimeKun/programming">GitHubレポジトリ</a>にMITライセンスをつけたのでMITライセンスの規約に従えばどんな用途にでも使えます。<br>
+            最近僕の<a
+                href="https://github.com/PotatoTimeKun/programming">GitHubレポジトリ</a>にMITライセンスをつけたのでMITライセンスの規約に従えばどんな用途にでも使えます。<br>
             (つまり、GitHub上の僕のプログラムを別のプログラムに使って公開したりとかそのままでも改変してでも再配布とかする時に<br>
-            「Copyright (c) 2022 PotatoTimeKun<br>
+            <br>Copyright (c) 2022 PotatoTimeKun<br>
             Released under the MIT license<br>
-            https://github.com/PotatoTimeKun/programming/blob/main/LICENSE.md 」<br>
+            https://github.com/<br>PotatoTimeKun/<br>programming/blob/main/<br>LICENSE.md <br><br>
             という文をREADMEといった文書に追加すればいかなる用途でも自由ということです。<br>
             ちなみにMITライセンスの仕様上、プログラムに欠陥等があったとしても僕は責任を負いません)<br>
-            プログラムを書き換えて命令を自分の好きな文字にしてみてもいいかもしれないですね(ただしswitch文のcaseの文字を書き換えるだけだとASCII文字のみ対応になります)
         </p>
-        <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
-    </body>
+    </section>
+    <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
+</body>
+
 </html>
