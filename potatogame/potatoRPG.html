@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ポテトゲーム君-ポテトしかおらんRPG-</title>
+    <meta name="description" content="自作RPG">
+    <link rel="stylesheet" href="game0.css?ver=1.0">
+</head>
+<header>
+    <img src="..\potatopic\header.png">
+    <table class="pc">
+        <div class="pc">
+            <a href="..\index.html#mainimg">ホーム</a>
+            <a href="..\index.html#m">自己紹介</a>
+            <a href="..\index.html#h">歴史</a>
+            <a href="..\index.html#b">ブログ</a>
+            <a href="..\index.html#l">リンク</a>
+            <a href="..\index.html#g">自作ゲーム紹介</a>
+            <a href="..\index.html#f">おすすめ動画</a>
+            <a href="..\index.html#o">OP・ED集</a>
+        </div>
+    </table>
+    <span class="nav_toggle">
+        <i></i>
+        <i></i>
+        <i></i>
+    </span>
+    <nav class="nav">
+        <ul class="nav_menu_ul">
+            <li class="nav_menu_li"><a href="..\index.html#mainimg">ホーム</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#m">自己紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#h">歴史</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#b">ブログ</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#l">リンク</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#g">自作ゲーム紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#f">おすすめ動画</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#o">OP・ED集</a></li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelector('.nav_toggle').addEventListener('click', function () { document.querySelector('.nav_toggle').classList.toggle('show'); document.querySelector('.nav').classList.toggle('show'); });
+    </script>
+</header>
+<body>
+    <h1 class="spacer">aaa</h1>
+    <h1 class="title">ポテトしかおらんRPG</h1>
+    <section class="play">
+        <p>ダウンロード(dropbox) → <a href="https://www.dropbox.com/s/zzecnbjln30cu0j/potatoRPG_release.zip?dl=0">potatoRPG(Windows)</a></p>
+    </section>
+    <h2>ゲーム概要</h2>
+    <section class="sec">
+        <img src="potatoRPG1.png" class="screenshot">
+        <p class="text">
+            ポテトしかおらんRPG<br>
+            計画から完成まで、夏休みちょっと前から約1ヶ月を使った僕史上最大のゲームです()<br>
+            手抜いたところもあるけど、頑張ったのでよかったらやってください～<br>
+            言語は色々考えた末Pythonで作りました。<br>
+        </p>
+    </section>
+    <h2>ゲーム内容</h2>
+    <section class="sec">
+        <img src="potatoRPG2.png" class="screenshot">
+        <p class="text">
+            色々話したいことあるけどあんまり話すとネタバレになるので、このページの下にネタバレを含む話を書いておきます...w<br>
+            登場人物は主人公(ポテト君)、村長(ポテト君)、魔女(ポテト君)、その他敵対ポテトです()<br>
+            なんか計画当初はボイス入れようかとか意味わからんこと考えてました、冷静になってやめましたw<br>
+            音量は設定から変えられます、あとなんかセーブデータをファイルに書き出して移動もできます。<br>
+            操作で困ったりしたらEscかEnterを押したら多分どうにかなるよ(てきとう)<br>
+            戻るのは基本Esc、メニュー画面開くのもEsc、アクションはEnter<br>
+            オートセーブはないから、なんか無駄なことしてセーブしたくなかったらセーブ押さずに落としてね←<br>
+        </p>
+    </section>
+    <h2>技術的なこと</h2>
+    <section class="sec">
+        <p class="text">
+            ソースコードとかは僕のGitHubレポジトリの<a href="https://github.com/PotatoTimeKun/programming/tree/main/Python/potatoRPG"
+                target="_blank">ここ</a>にあります。<br>
+            一応READMEは読んでください、素材は一部借りてるので。<br>
+            セーブデータはsettings.jsonに突っ込んでるから、ごちゃごちゃいじってチートとかしてもいいよw<br>
+            settings.jsonの構造はこんな感じです
+        </p>
+    <table border="1" class="t">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>bgm</td>
+                <td>BGMの音量</td>
+            </tr>
+            <tr>
+                <td>se</td>
+                <td>SEの音量</td>
+            </tr>
+            <tr>
+                <td>saves</td>
+                <td>セーブデータのリスト、1要素1プレイヤー</td>
+            </tr>
+            <tr>
+                <td>saves-name</td>
+                <td>プレイヤー名</td>
+            </tr>
+            <tr>
+                <td>saves-mapIndex</td>
+                <td>プレイヤーが現在いるマップのインデックス(0~14)</td>
+            </tr>
+            <tr>
+                <td>saves-x</td>
+                <td>プレイヤーのx座標</td>
+            </tr>
+            <tr>
+                <td>saves-y</td>
+                <td>プレイヤーのy座標</td>
+            </tr>
+            <tr>
+                <td>saves-Lv</td>
+                <td>プレイヤーのレベル</td>
+            </tr>
+            <tr>
+                <td>saves-keiken</td>
+                <td>プレイヤーの経験値(レベル毎、累計ではない)</td>
+            </tr>
+            <tr>
+                <td>saves-HP</td>
+                <td>プレイヤーのHP</td>
+            </tr>
+            <tr>
+                <td>saves-HPmax</td>
+                <td>プレイヤーのHPの最大値(装備等も考えた上での値,以下同)</td>
+            </tr>
+            <tr>
+                <td>saves-MP</td>
+                <td>プレイヤーのMP</td>
+            </tr>
+            <tr>
+                <td>saves-MPmax</td>
+                <td>プレイヤーのMPの最大値</td>
+            </tr>
+            <tr>
+                <td>saves-power</td>
+                <td>プレイヤーの攻撃力</td>
+            </tr>
+            <tr>
+                <td>saves-job</td>
+                <td>選んだ職業2つ(1:剣士,2:ヒーラー,3:アーチャー,4:魔法使い)</td>
+            </tr>
+            <tr>
+                <td>saves-jobLv</td>
+                <td>各職業のレベル、順番は上の通り</td>
+            </tr>
+            <tr>
+                <td>saves-jobKeiken</td>
+                <td>各職業での経験値</td>
+            </tr>
+            <tr>
+                <td>saves-jobPower</td>
+                <td>各職業で追加される攻撃力</td>
+            </tr>
+            <tr>
+                <td>saves-waza</td>
+                <td>戦闘に使う技のリスト,[[1つ目の職業の技のリスト],[2つ目の職業の技のリスト]]</td>
+            </tr>
+            <tr>
+                <td>saves-event</td>
+                <td>会話イベント等を起こすかどうか、基本的にプレイ時は順にfalseになる</td>
+            </tr>
+            <tr>
+                <td>saves-visited</td>
+                <td>そのマップがワープ可能か、つまり訪れたかどうか(ワープのないマップを除く)</td>
+            </tr>
+            <tr>
+                <td>saves-dead</td>
+                <td>死亡回数</td>
+            </tr>
+            <tr>
+                <td>saves-killed</td>
+                <td>敵を倒した回数</td>
+            </tr>
+            <tr>
+                <td>saves-power</td>
+                <td>攻撃力</td>
+            </tr>
+            <tr>
+                <td>saves-bag</td>
+                <td>持ち物リスト,[[アイテムのリスト],[装備品のリスト]]</td>
+            </tr>
+            <tr>
+                <td>saves-soubi</td>
+                <td>装着している装備品,[鎧,ズボン,武器]</td>
+            </tr>
+            <tr>
+                <td>saves-money</td>
+                <td>所持金</td>
+            </tr>
+            <tr>
+                <td>saves-farm</td>
+                <td>畑で未収穫の金</td>
+            </tr>
+            <tr>
+                <td>saves-maps</td>
+                <td>各マップの表示データ、当たり判定にも関わる</td>
+            </tr>
+            <tr>
+                <td>saves-mapEvent</td>
+                <td>各マップのマスイベント</td>
+            </tr>
+        </tbody>
+    </table>
+    <style>
+        .t{background-color: white;margin: 30px;}
+        @media screen and (max-width:1000px) {.t{font-size: 4vw;}}
+    </style>
+    <p class="text">
+        ここで、技は[技の種類,技名(,技の効果1,技の効果2)]です、効果の部分に書く内容は技によって変わります。<br>
+        装備はインデックスそのままですが、アイテムは[インデックス,アイテムのレベル]となります。
+    </p>
+    </section>
+    <h2>以下ネタバレ注意</h2>
+    <section class="sec">
+        <p class="text">
+            実は、隠し通路がありまして...w
+        </p>
+        <img src="potatoRPG3.png" class="screenshot">
+        <p class="text">
+            一つ目は森3の左上、この先に宝箱が3つあります。
+        </p>
+        <img src="potatoRPG4.png" class="screenshot">
+        <p class="text">
+            二つ目は洞窟2の右上(左右では少し真ん中寄り)、この先にワープホールと回復スポットがあります。<br>
+            「絶対分からんわ!!!」と思ったそこの君<br><br><br>
+            僕もそう思った<br><br><br>
+            元々は少しは分かるようにする予定だったんですが、手を抜きました←←←<br><br>
+            それと、あんまヒントとか出してませんでしたが、レベルを上げるとショップの売り物とか、職業とかが解放されます。<br>
+            レベルが20になったときに職業「魔法使い」が解放されるのですが、これはあんま気づかないかもしれませんねw<br>
+            魔法使い、普通に強いのでおすすめです。<br>
+        </p>
+        <img src="potatoRPG5.png" class="screenshot">
+        <p class="text">
+            あと、レベル45になったときに売られる「買えるもんなら買ってみな」をチートなしで買ってみたいんですよね...w<br><br>
+            それで実は、図らずともボツになってしまったアイテムがありまして...
+        </p>
+        <img src="potatoRPG6.png" class="screenshot">
+        <p class="text">
+            この「パワーポーション」、普通にセーブデータ書き換えて呼び出せば使えるのですが...<br><br>
+            入手手段を設定し忘れたw<br><br>
+            なのでチートのみによって使えます、settings.jsonから該当するプレイヤーの「bag」のアイテム部分に「[4,レベル(0~9)」を書けばできます。<br>
+            例↓
+        </p>
+        <img src="potatoRPG7.png" class="screenshot">
+        <p class="text">
+            このゲーム、Twitterの方でテスト版公開したりしたんですけど、その時はゲームの難易度が低すぎて調整をしたりしました。<br>
+            一応まだ公開してますけど、デバッグとかも兼ねたテスト版なのでバグがあります。<br>
+            ここまで大きいゲームを作ったことがないし(長くても丸1日で完成とか、乱数将棋はアプデ考えたら長いけどここまでじゃない)、
+            RPG作るのも初めてだったから、難しかったけど楽しかった...!!!<br>
+            約2500行という僕史上最長のプログラムにもなったしw<br>
+            ゲームをプレイしてくれた皆!ありがとう!<br>
+            もしかしたら、続編も...!?()
+        </p>
+    </section>
+    <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
+</body>
+
+</html>
