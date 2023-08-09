@@ -1,0 +1,49 @@
+img#mainimg {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #fff56c;
+    z-index: 0;
+}
+
+.title {
+    font-family: "Yu Gothic";
+    color: #4b5dff;
+    font-size: 2.5rem;
+    margin-top: 10px;
+}
+
+a {
+    font-family: "Yu Gothic";
+    color: blue;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #4b5dff;
+    margin-left: 3vw;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.sec {
+    padding: 3vw;
+    width: 85vw;
+    border: 3px dotted;
+    border-radius: 5px;
+    background-color: #FFF;
+    margin: 0 2.5vw 40px 2.5vw;
+}
+
+.text {
+    font-family: "Yu Gothic";
+}
+
+@media screen and (max-width:1000px) {
+
+    .text {
+        font-size: 4vw;
+    }
+}
