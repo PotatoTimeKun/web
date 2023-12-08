@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ポテトゲーム君-IF?-</title>
+    <meta name="description" content="条件推測ゲーム">
+    <link rel="stylesheet" href="game0.css?ver=1.0">
+</head>
+<header>
+    <img src="..\potatopic\header.png">
+    <table class="pc">
+        <div class="pc">
+            <a href="..\index.html#mainimg">ホーム</a>
+            <a href="..\index.html#m">自己紹介</a>
+            <a href="..\index.html#h">歴史</a>
+            <a href="..\index.html#b">ブログ</a>
+            <a href="..\index.html#l">リンク</a>
+            <a href="..\index.html#g">自作ゲーム紹介</a>
+            <a href="..\index.html#f">おすすめ動画</a>
+            <a href="..\index.html#o">OP・ED集</a>
+        </div>
+    </table>
+    <span class="nav_toggle">
+        <i></i>
+        <i></i>
+        <i></i>
+    </span>
+    <nav class="nav">
+        <ul class="nav_menu_ul">
+            <li class="nav_menu_li"><a href="..\index.html#mainimg">ホーム</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#m">自己紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#h">歴史</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#b">ブログ</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#l">リンク</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#g">自作ゲーム紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#f">おすすめ動画</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#o">OP・ED集</a></li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelector('.nav_toggle').addEventListener('click', function () { document.querySelector('.nav_toggle').classList.toggle('show'); document.querySelector('.nav').classList.toggle('show'); });
+    </script>
+</header>
+<body>
+    <h1 class="spacer">aaa</h1>
+    <h1 class="title">条件推測ゲーム</h1>
+    <section class="play">
+        <p>ダウンロード(Dropbox) → <a href="https://www.dropbox.com/scl/fi/x496xoxefcqz1sckqoczq/if.zip?rlkey=0npcwl0xwmr1ltkd7jvpq8uxx&dl=0" target="_blank">アンコリーノゲーム(Windows)</a></p>
+    </section>
+    <h2>ゲーム概要</h2>
+    <section class="sec">
+        <img src="if1.png" class="screenshot">
+        <p class="text">
+            プログラミング的な条件推測ゲーム<br>
+        </p>
+    </section>
+    <h2>ゲーム内容</h2>
+    <section class="sec">
+        <img src="if2.png" class="screenshot">
+        <p class="text">
+            各データ型のステージで関数が用意されていて、その入力を自分で決めることができる<br>
+            その条件を推測していくゲーム
+        </p>
+    </section>
+    <h2>その他</h2>
+    <section class="sec">
+        <p class="text">
+            ソースコードは<a href="https://github.com/PotatoTimeKun/programming/tree/main/Python/if" target="_blank">ここ</a>にあるよ<br>
+            Python環境がバグっててexe化に無駄に時間かけちゃった()
+        </p>
+    </section>
+    <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
+</body>
+
+</html>
