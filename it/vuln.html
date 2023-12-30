@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>クリエストリングからのDOM操作</title>
+    <meta name="description" content="脆弱性を確かめるページ">
+    <link rel="icon" type="image/png" href="../potatopic/logo.png">
+</head>
+
+<body>
+    <h4>ようこそ！</h4>
+    <p id="txt"></p>
+    <script>
+        let queryStr=new URLSearchParams(window.location.search)
+        document.getElementById("txt").innerHTML=queryStr.get("qer")
+    </script>
+</body>
+
+</html>
