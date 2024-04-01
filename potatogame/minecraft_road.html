@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ポテトゲーム君-マイクラ設計図ツール-</title>
+    <meta name="description" content="Asphalt Mod用">
+    <link rel="stylesheet" href="game0.css?ver=1.0">
+</head>
+<header>
+    <img src="..\potatopic\header.png">
+    <table class="pc">
+        <div class="pc">
+            <a href="..\index.html#mainimg">ホーム</a>
+            <a href="..\index.html#m">自己紹介</a>
+            <a href="..\index.html#h">歴史</a>
+            <a href="..\index.html#b">ブログ</a>
+            <a href="..\index.html#l">リンク</a>
+            <a href="..\index.html#g">自作ゲーム紹介</a>
+            <a href="..\index.html#f">おすすめ動画</a>
+            <a href="..\index.html#o">OP・ED集</a>
+        </div>
+    </table>
+    <span class="nav_toggle">
+        <i></i>
+        <i></i>
+        <i></i>
+    </span>
+    <nav class="nav">
+        <ul class="nav_menu_ul">
+            <li class="nav_menu_li"><a href="..\index.html#mainimg">ホーム</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#m">自己紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#h">歴史</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#b">ブログ</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#l">リンク</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#g">自作ゲーム紹介</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#f">おすすめ動画</a></li>
+            <li class="nav_menu_li"><a href="..\index.html#o">OP・ED集</a></li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelector('.nav_toggle').addEventListener('click', function () { document.querySelector('.nav_toggle').classList.toggle('show'); document.querySelector('.nav').classList.toggle('show'); });
+    </script>
+</header>
+<body>
+    <h1 class="spacer">aaa</h1>
+    <h1 class="title">Asphalt Modの道路設計ツール</h1>
+    <section class="play">
+        <p>ページ → <a href="https://www.dropbox.com/scl/fi/a9k2qfysyfcjaj3m08zs2/minecraft_road.zip?rlkey=9ylwq48v4fvh8ve1r4vgo4oip&dl=0" target="_blank">設計図ツール(Dropbox)</a></p>
+        <p>サンプルデータ → <a href="https://www.dropbox.com/scl/fi/qz640nyder3m6e6f9agmm/sample.txt?rlkey=hld61qt0ifvap6aqk5dhcy2nk&dl=0" target="_blank">Sample.txt(Dropbox)</a></p>
+    </section>
+    <h2>概要</h2>
+    <section class="sec">
+        <img src="minecraft_road1.png" class="screenshot">
+        <p class="text">
+            これはマインクラフトのAsphalt Modの道路設計を目的に作ったものだよ<br>
+            Windows以外では多分動かないかな、ソースコードから動かすことはできるかもだけど<br>
+            ショートカットについてはCtrl+s(保存)とCtrl+z(元に戻す)だけは対応してる<br>
+            元に戻せるのは1つ前までね！<br>
+            まあ要らないかもだけど、間違えて一気に消しちゃったときとかに使ってね<br>
+            ソースコードはできるだけコメント書いておくから普通の人(???)は気軽に改変しちゃってね<br>
+            まあProcessingで作ってるから環境入れるところからになるかも、Javaに書き換えられた方のソースコードを使ってもいいかも?<br>
+            ということで2回目書くの面倒でREADMEをほとんどコピペした説明でした()
+        </p>
+    </section>
+    <h2>技術的なこと</h2>
+    <section class="sec">
+        <p class="text">
+            ソースコードとかは僕のGitHubレポジトリの<a href="https://github.com/PotatoTimeKun/programming/tree/main/Processing/minecraft_road"
+                target="_blank">ここ</a>にあるよ<br>
+            サンプルは<a href="https://github.com/PotatoTimeKun/programming/blob/main/Processing/minecraft_road/sample.txt" target="_blank">こんな感じ</a><br>
+        </p>
+    </section>
+    <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
+</body>
+
+</html>
