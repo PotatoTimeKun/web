@@ -46,8 +46,11 @@
     <h1 class="spacer">aaa</h1>
     <h1 class="title">Asphalt Modの道路設計ツール</h1>
     <section class="play">
-        <p>ページ → <a href="https://www.dropbox.com/scl/fi/a9k2qfysyfcjaj3m08zs2/minecraft_road.zip?rlkey=9ylwq48v4fvh8ve1r4vgo4oip&dl=0" target="_blank">設計図ツール(Dropbox)</a></p>
-        <p>サンプルデータ → <a href="https://www.dropbox.com/scl/fi/qz640nyder3m6e6f9agmm/sample.txt?rlkey=hld61qt0ifvap6aqk5dhcy2nk&dl=0" target="_blank">Sample.txt(Dropbox)</a></p>
+        <p>設計図ツール(最新) → <a href="https://drive.google.com/file/d/1gpK3Li5sTdrmi7L6aSraILuxynRvwJ2n/view?usp=sharing" target="_blank">1.1(Googleドライブ)</a></p>
+        <p>設計図ツール(旧) → <a href="https://www.dropbox.com/scl/fi/a9k2qfysyfcjaj3m08zs2/minecraft_road.zip?rlkey=9ylwq48v4fvh8ve1r4vgo4oip&dl=0" target="_blank">1.0(Dropbox)</a></p>
+        <p>サンプルデータ※1.0 → <a href="https://www.dropbox.com/scl/fi/qz640nyder3m6e6f9agmm/sample.txt?rlkey=hld61qt0ifvap6aqk5dhcy2nk&dl=0" target="_blank">Sample.txt(Dropbox)</a></p>
+        <p>MoreLinePack → <a href="https://drive.google.com/file/d/1fc0sYpl9OhYqjNY4d-WGstoQ6Vp6oQJx/view?usp=sharing" target="_blank">1.0.0(Googleドライブ)</a></p>
+        <p>データ変換ツール → <a href="https://drive.google.com/file/d/1JieIYhwzIEvM313uePQDODUh1jT11Qht/view?usp=sharing" target="_blank">1.0→1.1</a></p>
     </section>
     <h2>概要</h2>
     <section class="sec">
@@ -63,12 +66,41 @@
             ということで2回目書くの面倒でREADMEをほとんどコピペした説明でした()
         </p>
     </section>
+    <h2>MoreLinePack</h2>
+    <section class="sec">
+        <img src="minecraft_road2.png" class="screenshot">
+        <p class="text">
+            AsphaltMod用の白線拡張パック！<br>
+            導入方法はAsphaltModの公式HPにある通りmods/asphaltmod/line/に入れるだけ<br>
+            サンプル画像に乗ってないものやそれぞれの線の黄色版も用意してるから入れてみてね！<br>
+            設計図ツールには標準で入れてるよ～
+        </p>
+    </section>
+    <h2>アップデート</h2>
+    <section class="sec">
+        <p class="text">
+            1.0<br>
+            初期(バージョン表記なし)<br>
+            <br>
+            1.1<br>
+            ※1.1で1.0のセーブデータを読み込もうとするとバグります(ファイル名を変えたので)<br>
+            1.0のデータを1.1のデータに変換するツールを公開しておきました、文字コードの変換もできます(Processingはutf-8じゃないと開けないっぽい)<br>
+            ・範囲選択を行うときに重くなるバグを修正(修正後でもマウスをめちゃくちゃに動かせば重いと思うけど普通に選択したとき)<br>
+            ・大きさの異なる画像を追加したとき、一覧でそのままのサイズで表示されるバグを修正<br>
+            ・MoreLinePack(1.0.0)の画像を追加<br>
+            ・マス目を画像より前に表示するように変更(この方が何マスで作ればいいかわかりやすいと思った)<br>
+            ・下部の一覧にファイル名を表示するように変更(+ファイル名を日本語に変更)<br>
+            ・ファイル読み込み時に座標をリセット(書くまでもないか?)<br>
+            ・メニューに最近開いたファイルの項目を追加<br>
+            ・ファイル入力時のバリデーションの追加(形式に則らない行を無視)<br>
+            ・「移動」機能の追加(移動元と移動先の範囲が被るとバグります)<br>
+        </p>
+    </section>
     <h2>技術的なこと</h2>
     <section class="sec">
         <p class="text">
-            ソースコードとかは僕のGitHubレポジトリの<a href="https://github.com/PotatoTimeKun/programming/tree/main/Processing/minecraft_road"
-                target="_blank">ここ</a>にあるよ<br>
-            サンプルは<a href="https://github.com/PotatoTimeKun/programming/blob/main/Processing/minecraft_road/sample.txt" target="_blank">こんな感じ</a><br>
+            ソースコードはツールと同封してあります<br>
+            まあGitHubにもあるけど、基本最新のだから同封してあるのを見た方がいいと思う
         </p>
     </section>
     <a href="https://potatotimekun.github.io/web">ホームページに戻る</a>
