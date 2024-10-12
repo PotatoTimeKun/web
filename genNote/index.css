@@ -22,7 +22,7 @@ h1 {
   color: #4b5dff;
   margin-left: 3vw;
   margin-bottom: 0;
-  margin-top: 10vw;
+  margin-top: 1vw;
 }
 
 a:link {
@@ -39,6 +39,19 @@ a {
 
 p {
   font-size: 1.2rem;
+}
+
+.button{
+  width: 200px;
+  font-size: 1.2rem;
+  background-color: #4b5dff;
+  padding: 7px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+#id{
+  font-size: 1.5rem;
 }
 
 
@@ -61,11 +74,15 @@ p {
   }
 
   p {
-    font-size: 4vw;
+    font-size: 5vw;
+  }
+
+  #id {
+    font-size: 6vw;
   }
 
   h1 {
-    font-size: 8vw;
+    font-size: 6vw;
   }
 
 }
