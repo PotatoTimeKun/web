@@ -15,8 +15,18 @@
 </header>
 
 <body>
-    <p id="a">a</p>
-    <script defer src="index.js" type="module"></script>
+    <script src="index.js"></script>
+    <h1>Misskeyマルコフ連鎖ノート生成</h1>
+    <section>
+        <p>ユーザー指定</p>
+        <label>@<input type="text" size="20" value="ユーザー名" id="username">@<input type="text" size="20" value="サーバー名" id="servername"></label><br>
+        <p>例: @potatokun@sushi.ski</p>
+        <input type="button" value="ノートを生成" onclick="getNoteButton()" id="getButton" class="button">
+        <p id="note"></p>
+        <input type="button" value="再生成" onclick="regen()" id="regenButton" hidden="true" class="button"><br>
+        <input type="button" value="投稿" onclick="post()" id="postButton" hidden="true" class="button">
+    </section>
+    <a href="https://potatotimekun.github.io/web/" target="_blank">ポテトタイム君ホームページ</a>
 </body>
 
 </html>
