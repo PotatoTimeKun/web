@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>MASEIMO THE MOVIE</title>
+  <meta name="description" content="マセイモが待望の映画化！マセイモによる世界滅亡を見届けろ。※エイプリルフールネタです">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="../potatopic/logo.png">
+  <style>
+    /* リセットや基本的なスタイル */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      background: #f0f0f0;
+      color: #333;
+    }
+    header, main, footer {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      margin-bottom: 1em;
+    }
+    img, svg {
+      max-width: 100%;
+      display: block;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 0;
+      text-decoration: none;
+      background: #333;
+      color: #fff;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      opacity: 0.8;
+    }
+
+    /* ヒーローセクション(トップ)のスタイル */
+    .hero {
+      color: #ffffff;
+      position: relative;
+      text-align: center;
+      padding: 50px 0;
+      /* PC向けデフォルト背景 */
+      background: #e0f7fa url("top_wide.png") no-repeat center / cover;
+      margin-bottom: 40px;
+    }
+    /* 画面幅が768px以下の場合はスマホ用画像に切り替える */
+    @media (max-width: 768px) {
+      .hero {
+        background: #e0f7fa url("top.png") no-repeat center / cover;
+      }
+    }
+    /* タイトルを飛び込みアニメーションする */
+    @keyframes slideInFromTop {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      /* アニメーション設定 */
+      animation: slideInFromTop 2s ease-out forwards;
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: slideInFromTop 1s ease-out forwards;
+      animation-delay: 1s;
+    }
+
+    /* アニメーション用のクラス */
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+      width: 200px; /* SVGの大きさを調整 */
+      margin: 0 auto; /* 中央寄せ */
+    }
+
+    /* キャラクター紹介セクション */
+    .characters {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.character-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.character {
+  flex: 1 1 calc(33.3% - 40px);
+  min-width: 250px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* キャラクター画像のスタイル */
+.character img.character-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  object-fit: cover; /* 必要に応じて省略可 */
+}
+
+    .character h3 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    .character p {
+      font-size: 0.9em;
+    }
+
+    /* ストーリー紹介セクション */
+    .story {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      font-size: 0.85em;
+      color: #666;
+      margin-bottom: 40px;
+    }
+    footer p {
+      margin-bottom: 0.5em;
+    }
+    footer a {
+      color: #666;
+      text-decoration: underline;
+    }
+.carousel-container {
+  width: 100%;
+  margin: 0 auto;       /* 中央寄せ */
+  overflow: hidden;     /* はみ出した部分を非表示 */
+  position: relative;   /* 必要に応じて */
+  background-color: #ffffff;
+}
+
+.carousel-track {
+  display: flex;        /* 横並びにする */
+  transition: transform 0.5s ease-in-out; /* スライドの動き */
+}
+
+.slide {
+  min-width: 100%;      /* 1枚のスライドを「画面幅いっぱい」に表示 */
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  margin: auto auto;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <h2>MASEIMO THE MOVIE</h2>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero">
+    <h1>世界は、「マセイモ」に滅ぼされる</h1>
+    <p>謎のイモ生物、マセイモが世界を襲う壮大な物語が今ここに…</p>
+    <!-- 背景画像が敷かれている上に、SVGをアニメーションで表示 -->
+    <div>
+      <img src="imo.svg" alt="マセイモ" class="float-animation" />
+    </div>
+    <!-- 例: ボタン配置 -->
+    <a href="#characters" class="btn">キャラクター紹介を見る</a>
+  </section>
+
+  <!-- キャラクター紹介セクション -->
+  <main>
+    <section id="characters" class="characters">
+      <h2>キャラクター紹介</h2>
+      <div class="character-list">
+        <!-- マセイモの紹介例 -->
+        <!-- 例: マセイモの紹介 -->
+<div class="character">
+   <h3>マセイモ</h3>
+   <p>
+     突如現れた謎のイモ状生命体。<br>
+     機械のようであるが、自己増殖機能を持つ。<br>
+     暴れたマセイモは、誰も止めることができない...
+   </p>
+   <img src="imo.svg" alt="マセイモの画像" class="character-img" />
+</div>
+
+
+<div class="character">
+
+   <h3>塩ポテト君</h3>
+   <p>
+     マセイモ対策部の長。<br>
+     マセイモに対して詳しいが、討伐は上手くいっていないようだ。
+   </p>
+   <img src="potatokun.png" alt="塩ポテト君の画像" class="character-img" />
+</div>
+
+<div class="character">
+
+   <h3>ハンバーグもぐもぐザウルス</h3>
+   <p>
+     ハンバーグ好きの恐竜。<br>
+     のどかな山で平和に過ごしていた。マセイモが来るまでは＿＿。
+   </p>
+   <img src="hanmoza.png" alt="ハンもザの画像" class="character-img" />
+</div>
+
+<div class="character">
+
+   <h3>にゃんぷっぷー</h3>
+   <p>
+     マセイモ対策部、実行部隊。<br>
+     マセイモ対策のエキスパートであるが、マセイモに対して油断はできない。
+   </p>
+   <img src="nyap.png" alt="にゃぷの画像" class="character-img" />
+</div>
+
+      </div>
+    </section>
+
+    <!-- ストーリー紹介セクション -->
+    <section class="story">
+      <h2>ストーリー</h2>
+      <p>
+        いつもと変わらない日常、変わらない世界。<br>
+        しかしある日、「マセイモ」は現れた。そして、彼らによって、世界は侵食されていく。<br><br>
+        「おちんちんちわ～」に隠された秘密は何なのか＿＿＿＿<br>
+        その先に待ち受ける衝撃の結末とは…!?
+      </p>
+    </section>
+</main>
+<section class="carousel-container">
+  <div class="carousel-track">
+    <!-- スライド1 -->
+    <div class="slide">
+      <img src="pic1.png">
+    </div>
+    <!-- スライド2 -->
+    <div class="slide">
+      <img src="pic2.png">
+    </div>
+    <!-- スライド3 -->
+    <div class="slide">
+      <img src="pic3.png">
+    </div>
+<div class="slide">
+      <img src="pic4.png">
+    </div>
+<div class="slide">
+      <img src="pic5.png">
+    </div>
+<div class="slide">
+      <img src="pic6.png">
+    </div>
+<div class="slide">
+      <img src="pic7.png">
+    </div>
+<div class="slide">
+      <img src="pic8.png">
+    </div>
+<div class="slide">
+      <img src="pic9.png">
+    </div>
+<div class="slide">
+      <img src="pic11.png">
+    </div>
+    <!-- 必要なだけスライド(画像)を追加 -->
+  </div>
+</section>
+
+
+  <!-- フッター -->
+  <footer>
+    <p>© 2025 Maseimo Film Project</p>
+    <p>このサイトはエイプリルフールのジョークコンテンツです。実際の映画化予定はありません。</p>
+    <p><a href="#top">トップへ戻る</a></p>
+  </footer>
+
+
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector(".carousel-track");
+    const slides = Array.from(track.children);
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    // 3秒ごとに次のスライドへ移動する
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      track.style.transform = `translateX(-${100 * currentIndex}%)`;
+    }, 3000);
+  });
+</script>
+</body>
+</html>
