@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Misskey Word & Emoji Fall</title>
-    <!-- 形態素解析ライブラリ Kuromoji.js を読み込む -->
-    <script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js"></script>
     <style>
         body {
             margin: 0;
@@ -61,6 +59,42 @@
     <canvas id="canvas"></canvas>
 
     <script>
+        // --- 1. Web Worker のコードを文字列として定義（フリーズ対策） ---
+        // これにより別スレッドでKuromojiが動くため、画面が絶対に固まらなくなる
+        const workerCode = `
+      importScripts("https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js");
+
+      let tokenizer = null;
+
+      kuromoji.builder({ dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/" }).build((err, _tokenizer) => {
+        if (err) {
+          self.postMessage({ type: "ERROR", error: err.toString() });
+          return;
+        }
+        tokenizer = _tokenizer;
+        self.postMessage({ type: "READY" });
+      });
+
+      self.onmessage = function(e) {
+        if (e.data.type === "PARSE") {
+          if (!tokenizer) return;
+          const tokens = tokenizer.tokenize(e.data.text);
+          const words = [];
+          for (const token of tokens) {
+            if (token.pos === "助詞" || token.pos === "助動詞" || token.pos === "記号") continue;
+            if (token.surface_form.trim() === "") continue;
+            words.push(token.surface_form);
+          }
+          self.postMessage({ type: "PARSE_RESULT", words: words });
+        }
+      };
+    `;
+
+        // Workerの起動
+        const blob = new Blob([workerCode], { type: "application/javascript" });
+        const worker = new Worker(URL.createObjectURL(blob));
+
+        // --- 2. メインのフロントエンド処理 ---
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const startBtn = document.getElementById('start-btn');
@@ -74,27 +108,36 @@
         window.addEventListener('resize', resize);
         resize();
 
-        let tokenizer = null;
         let wordsPool = [];
         let fallingWords = [];
         let isAnimating = false;
+        const imageCache = {};
 
-        // サーバー全体のカスタム絵文字を保持するマップ
-        let globalEmojiMap = {};
-
-        // Kuromoji.jsの初期化
-        kuromoji.builder({ dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/" }).build((err, _tokenizer) => {
-            if (err) {
-                console.error(err);
-                statusDiv.textContent = "辞書の読み込みに失敗した";
-                return;
+        // Workerからのメッセージ受信
+        let parseResolve = null;
+        worker.onmessage = function (e) {
+            if (e.data.type === "READY") {
+                startBtn.disabled = false;
+                startBtn.textContent = "取得開始";
+                statusDiv.textContent = "準備完了";
+            } else if (e.data.type === "PARSE_RESULT") {
+                if (parseResolve) {
+                    parseResolve(e.data.words);
+                    parseResolve = null;
+                }
+            } else if (e.data.type === "ERROR") {
+                statusDiv.textContent = "辞書読み込みエラー: " + e.data.error;
             }
-            tokenizer = _tokenizer;
-            startBtn.disabled = false;
-            startBtn.textContent = "取得開始";
-        });
+        };
 
-        // 不要なテキストの削除
+        // Workerに形態素解析を依頼する関数
+        function parseTextAsync(text) {
+            return new Promise((resolve) => {
+                parseResolve = resolve;
+                worker.postMessage({ type: "PARSE", text: text });
+            });
+        }
+
         function cleanText(text) {
             if (!text) return "";
             text = text.replace(/https?:\/\/[\w!?\/\+\-_~;.,*&@#$%()'[\]]+/g, "");
@@ -103,51 +146,21 @@
             return text;
         }
 
-        // 形態素解析して単語の配列にする
-        function extractWords(text) {
-            const tokens = tokenizer.tokenize(text);
-            const extracted = [];
-            for (const token of tokens) {
-                if (token.pos === "助詞" || token.pos === "助動詞" || token.pos === "記号") {
-                    continue;
-                }
-                if (token.surface_form.trim() === "") {
-                    continue;
-                }
-                extracted.push(token.surface_form);
-            }
-            return extracted;
-        }
-
         const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-        // サーバーの全カスタム絵文字を取得するマスターデータAPI
-        async function fetchGlobalEmojis(host) {
-            statusDiv.textContent = "サーバーのカスタム絵文字一覧を取得中...";
+        // 単一の絵文字情報をサーバーから取得するAPI (api/emoji)
+        async function fetchSingleEmojiUrl(host, name) {
             try {
-                const res = await fetch(`https://${host}/api/emojis`, {
+                const res = await fetch(`https://${host}/api/emoji`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({})
+                    body: JSON.stringify({ name: name })
                 });
-                if (!res.ok) throw new Error("絵文字APIエラー");
+                if (!res.ok) return null;
                 const data = await res.json();
-
-                const map = {};
-                // Misskeyの仕様に合わせて、配列（{emojis: [...]} または [...]）をパース
-                const emojisList = data.emojis ? data.emojis : data;
-                if (Array.isArray(emojisList)) {
-                    emojisList.forEach(e => {
-                        if (e.name && e.url) {
-                            map[e.name] = e.url;
-                        }
-                    });
-                }
-                return map;
+                return data.url || null;
             } catch (e) {
-                console.error(e);
-                statusDiv.textContent = "カスタム絵文字の取得に失敗した";
-                return {};
+                return null;
             }
         }
 
@@ -177,10 +190,10 @@
 
                     notes = notes.concat(data);
                     untilId = data[data.length - 1].id;
-                    await sleep(600);
+                    await sleep(100);
                 } catch (e) {
                     console.error(e);
-                    statusDiv.textContent = "取得中にエラーが発生した";
+                    statusDiv.textContent = "取得中にエラーが発生";
                     break;
                 }
             }
@@ -195,13 +208,10 @@
             wordsPool = [];
             fallingWords = [];
 
-            // 1. 最初にサーバー全体の絵文字マスターデータを取得
-            globalEmojiMap = await fetchGlobalEmojis(host);
-
-            // 2. タイムラインの投稿を取得
             const notes = await fetchNotes(host);
-            statusDiv.textContent = "テキストとカスタム絵文字を解析中...";
+            statusDiv.textContent = "テキストと絵文字を解析中...";
 
+            // すべてのノートを順番に処理
             for (const note of notes) {
                 const targetNote = note.renote ? note.renote : note;
                 let text = targetNote.text;
@@ -209,7 +219,6 @@
 
                 text = cleanText(text);
 
-                // コロンで囲まれたカスタム絵文字を切り出す
                 const emojiRegex = /:([a-zA-Z0-9_+-]+):/g;
                 let lastIndex = 0;
                 let match;
@@ -218,28 +227,39 @@
                     const emojiName = match[1];
                     const beforeText = text.substring(lastIndex, match.index);
 
+                    // 前のテキストをWorkerで非同期に解析
                     if (beforeText.trim()) {
-                        const words = extractWords(beforeText);
+                        const words = await parseTextAsync(beforeText);
                         wordsPool.push(...words.map(w => ({ type: 'text', value: w })));
                     }
 
-                    // マスターデータから一致する絵文字画像を探す
-                    if (globalEmojiMap[emojiName]) {
-                        const img = new Image();
-                        img.crossOrigin = "anonymous";
-                        img.src = globalEmojiMap[emojiName];
+                    // ★絵文字単体取得APIを叩く処理
+                    if (imageCache[emojiName] === undefined) {
+                        // キャッシュにない場合はAPIに問い合わせ
+                        const realUrl = await fetchSingleEmojiUrl(host, emojiName);
+                        if (realUrl) {
+                            const img = new Image();
+                            img.crossOrigin = "anonymous";
+                            img.src = realUrl;
+                            imageCache[emojiName] = img;
+                        } else {
+                            // 存在しない絵文字（ただのコロン文字列など）はnullを入れて次からスキップ
+                            imageCache[emojiName] = null;
+                        }
+                    }
 
-                        wordsPool.push({ type: 'emoji', value: img });
+                    if (imageCache[emojiName]) {
+                        wordsPool.push({ type: 'emoji', value: imageCache[emojiName] });
                     } else {
-                        // マスターデータにない場合はそのままテキストとして扱う
                         wordsPool.push({ type: 'text', value: match[0] });
                     }
+
                     lastIndex = emojiRegex.lastIndex;
                 }
 
                 const afterText = text.substring(lastIndex);
                 if (afterText.trim()) {
-                    const words = extractWords(afterText);
+                    const words = await parseTextAsync(afterText);
                     wordsPool.push(...words.map(w => ({ type: 'text', value: w })));
                 }
             }
@@ -282,12 +302,8 @@
                     ctx.fillText(fw.value, fw.x, fw.y);
                 } else if (fw.type === 'emoji') {
                     const size = fw.fontSize * 1.5;
-                    if (fw.value.complete && fw.value.naturalWidth !== 0) {
+                    if (fw.value && fw.value.complete && fw.value.naturalWidth > 0) {
                         ctx.drawImage(fw.value, fw.x, fw.y - size + 5, size, size);
-                    } else {
-                        ctx.fillStyle = '#fff';
-                        ctx.font = `${fw.fontSize}px sans-serif`;
-                        ctx.fillText('•', fw.x, fw.y); // 読み込み中のフォールバック用ドット
                     }
                 }
 
