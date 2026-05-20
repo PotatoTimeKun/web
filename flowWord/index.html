@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Misskey Word & Emoji Fall</title>
+    <!-- 形態素解析ライブラリ Kuromoji.js を読み込む -->
+    <script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            color: #fff;
+            font-family: sans-serif;
+        }
+
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        input {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #status {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #0f0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ui">
+        <label for="host">Misskeyサーバー:</label><br>
+        <input type="text" id="host" value="" placeholder="例: sushi.ski"><br><br>
+        <button id="start-btn" disabled>辞書データを読み込み中...</button>
+        <div id="status"></div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('start-btn');
+        const statusDiv = document.getElementById('status');
+        const hostInput = document.getElementById('host');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        let tokenizer = null;
+        let wordsPool = [];
+        let fallingWords = [];
+        let isAnimating = false;
+
+        // サーバー全体のカスタム絵文字を保持するマップ
+        let globalEmojiMap = {};
+
+        // Kuromoji.jsの初期化
+        kuromoji.builder({ dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/" }).build((err, _tokenizer) => {
+            if (err) {
+                console.error(err);
+                statusDiv.textContent = "辞書の読み込みに失敗した";
+                return;
+            }
+            tokenizer = _tokenizer;
+            startBtn.disabled = false;
+            startBtn.textContent = "取得開始";
+        });
+
+        // 不要なテキストの削除
+        function cleanText(text) {
+            if (!text) return "";
+            text = text.replace(/https?:\/\/[\w!?\/\+\-_~;.,*&@#$%()'[\]]+/g, "");
+            text = text.replace(/@[a-zA-Z0-9_.-]+/g, "");
+            text = text.replace(/\$\[[\s\S]*?\]/g, "");
+            return text;
+        }
+
+        // 形態素解析して単語の配列にする
+        function extractWords(text) {
+            const tokens = tokenizer.tokenize(text);
+            const extracted = [];
+            for (const token of tokens) {
+                if (token.pos === "助詞" || token.pos === "助動詞" || token.pos === "記号") {
+                    continue;
+                }
+                if (token.surface_form.trim() === "") {
+                    continue;
+                }
+                extracted.push(token.surface_form);
+            }
+            return extracted;
+        }
+
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        // サーバーの全カスタム絵文字を取得するマスターデータAPI
+        async function fetchGlobalEmojis(host) {
+            statusDiv.textContent = "サーバーのカスタム絵文字一覧を取得中...";
+            try {
+                const res = await fetch(`https://${host}/api/emojis`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({})
+                });
+                if (!res.ok) throw new Error("絵文字APIエラー");
+                const data = await res.json();
+
+                const map = {};
+                // Misskeyの仕様に合わせて、配列（{emojis: [...]} または [...]）をパース
+                const emojisList = data.emojis ? data.emojis : data;
+                if (Array.isArray(emojisList)) {
+                    emojisList.forEach(e => {
+                        if (e.name && e.url) {
+                            map[e.name] = e.url;
+                        }
+                    });
+                }
+                return map;
+            } catch (e) {
+                console.error(e);
+                statusDiv.textContent = "カスタム絵文字の取得に失敗した";
+                return {};
+            }
+        }
+
+        // Misskeyから投稿を取得
+        async function fetchNotes(host) {
+            let notes = [];
+            let untilId = null;
+            const targetCount = 1000;
+            const limitPerRequest = 100;
+            const requests = targetCount / limitPerRequest;
+
+            for (let i = 0; i < requests; i++) {
+                statusDiv.textContent = `投稿を取得中... (${i + 1}/${requests}回目)`;
+                const body = { limit: limitPerRequest };
+                if (untilId) body.untilId = untilId;
+
+                try {
+                    const res = await fetch(`https://${host}/api/notes/local-timeline`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(body)
+                    });
+
+                    if (!res.ok) throw new Error("APIエラー");
+                    const data = await res.json();
+                    if (data.length === 0) break;
+
+                    notes = notes.concat(data);
+                    untilId = data[data.length - 1].id;
+                    await sleep(600);
+                } catch (e) {
+                    console.error(e);
+                    statusDiv.textContent = "取得中にエラーが発生した";
+                    break;
+                }
+            }
+            return notes;
+        }
+
+        startBtn.addEventListener('click', async () => {
+            const host = hostInput.value.trim();
+            if (!host) return;
+
+            startBtn.disabled = true;
+            wordsPool = [];
+            fallingWords = [];
+
+            // 1. 最初にサーバー全体の絵文字マスターデータを取得
+            globalEmojiMap = await fetchGlobalEmojis(host);
+
+            // 2. タイムラインの投稿を取得
+            const notes = await fetchNotes(host);
+            statusDiv.textContent = "テキストとカスタム絵文字を解析中...";
+
+            for (const note of notes) {
+                const targetNote = note.renote ? note.renote : note;
+                let text = targetNote.text;
+                if (!text) continue;
+
+                text = cleanText(text);
+
+                // コロンで囲まれたカスタム絵文字を切り出す
+                const emojiRegex = /:([a-zA-Z0-9_+-]+):/g;
+                let lastIndex = 0;
+                let match;
+
+                while ((match = emojiRegex.exec(text)) !== null) {
+                    const emojiName = match[1];
+                    const beforeText = text.substring(lastIndex, match.index);
+
+                    if (beforeText.trim()) {
+                        const words = extractWords(beforeText);
+                        wordsPool.push(...words.map(w => ({ type: 'text', value: w })));
+                    }
+
+                    // マスターデータから一致する絵文字画像を探す
+                    if (globalEmojiMap[emojiName]) {
+                        const img = new Image();
+                        img.crossOrigin = "anonymous";
+                        img.src = globalEmojiMap[emojiName];
+
+                        wordsPool.push({ type: 'emoji', value: img });
+                    } else {
+                        // マスターデータにない場合はそのままテキストとして扱う
+                        wordsPool.push({ type: 'text', value: match[0] });
+                    }
+                    lastIndex = emojiRegex.lastIndex;
+                }
+
+                const afterText = text.substring(lastIndex);
+                if (afterText.trim()) {
+                    const words = extractWords(afterText);
+                    wordsPool.push(...words.map(w => ({ type: 'text', value: w })));
+                }
+            }
+
+            statusDiv.textContent = `準備完了！ (総要素数: ${wordsPool.length})`;
+            startBtn.disabled = false;
+            startBtn.textContent = "再取得";
+
+            if (!isAnimating && wordsPool.length > 0) {
+                isAnimating = true;
+                animate();
+            }
+        });
+
+        function spawnWord() {
+            if (wordsPool.length === 0) return;
+            const item = wordsPool[Math.floor(Math.random() * wordsPool.length)];
+
+            fallingWords.push({
+                type: item.type,
+                value: item.value,
+                x: Math.random() * canvas.width,
+                y: -50,
+                speed: 1 + Math.random() * 3,
+                fontSize: 14 + Math.random() * 20,
+                color: `hsl(${120 + Math.random() * 60}, 100%, 50%)`
+            });
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < fallingWords.length; i++) {
+                const fw = fallingWords[i];
+
+                if (fw.type === 'text') {
+                    ctx.fillStyle = fw.color;
+                    ctx.font = `${fw.fontSize}px sans-serif`;
+                    ctx.fillText(fw.value, fw.x, fw.y);
+                } else if (fw.type === 'emoji') {
+                    const size = fw.fontSize * 1.5;
+                    if (fw.value.complete && fw.value.naturalWidth !== 0) {
+                        ctx.drawImage(fw.value, fw.x, fw.y - size + 5, size, size);
+                    } else {
+                        ctx.fillStyle = '#fff';
+                        ctx.font = `${fw.fontSize}px sans-serif`;
+                        ctx.fillText('•', fw.x, fw.y); // 読み込み中のフォールバック用ドット
+                    }
+                }
+
+                fw.y += fw.speed;
+            }
+
+            fallingWords = fallingWords.filter(fw => fw.y < canvas.height + 50);
+
+            if (Math.random() < 0.2) {
+                spawnWord();
+            }
+
+            requestAnimationFrame(animate);
+        }
+    </script>
+</body>
+
+</html>
